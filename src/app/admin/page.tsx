@@ -2,6 +2,8 @@ import { Container, Typography, Card, CardContent, Box } from '@mui/material'
 import { Article, Photo, Description, People } from '@mui/icons-material'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminDashboard() {
   const [postsCount, photosCount, documentsCount, usersCount] = await Promise.all([
     prisma.post.count(),
