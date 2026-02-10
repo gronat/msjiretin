@@ -5,7 +5,7 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import { Edit, Delete, Download } from '@mui/icons-material'
 import Link from 'next/link'
 import { formatDistance } from 'date-fns'
-import { cs } from 'date-fns/locale'
+import { cs } from 'date-fns/locale/cs'
 import { useRouter } from 'next/navigation'
 
 type Document = {

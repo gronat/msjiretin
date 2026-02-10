@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Chip, IconButton, Box, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material'
 import { Edit, Delete, Visibility } from '@mui/icons-material'
 import { formatDistance } from 'date-fns'
-import { cs } from 'date-fns/locale'
+import { cs } from 'date-fns/locale/cs'
 import LinkIconButton from '@/components/LinkIconButton'
 import { useRouter } from 'next/navigation'
 
