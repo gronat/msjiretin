@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Card, CardContent, Box } from '@mui/material'
+import { Container, Typography, Card, CardContent, Box } from '@mui/material'
 import { Article, Photo, Description, People } from '@mui/icons-material'
 import { prisma } from '@/lib/prisma'
 
@@ -23,41 +23,45 @@ export default async function AdminDashboard() {
         Dashboard
       </Typography>
 
-      <Grid container spacing={3}>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
+          gap: 3,
+        }}
+      >
         {stats.map((stat) => (
-          <Grid item xs={12} sm={6} md={3} key={stat.label}>
-            <Card sx={{ height: '100%' }}>
-              <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <Box
-                    sx={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: 2,
-                      bgcolor: stat.color,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'white',
-                      mr: 2,
-                    }}
-                  >
-                    {stat.icon}
-                  </Box>
-                  <Box>
-                    <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                      {stat.count}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {stat.label}
-                    </Typography>
-                  </Box>
+          <Card key={stat.label} sx={{ height: '100%' }}>
+            <CardContent>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <Box
+                  sx={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 2,
+                    bgcolor: stat.color,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    mr: 2,
+                  }}
+                >
+                  {stat.icon}
                 </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+                <Box>
+                  <Typography variant="h4" sx={{ fontWeight: 700 }}>
+                    {stat.count}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {stat.label}
+                  </Typography>
+                </Box>
+              </Box>
+            </CardContent>
+          </Card>
         ))}
-      </Grid>
+      </Box>
 
       <Card sx={{ mt: 4, p: 3 }}>
         <Typography variant="h5" gutterBottom>
