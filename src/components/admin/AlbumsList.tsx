@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Grid, Card, CardMedia, CardContent, CardActions, IconButton, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button, Box } from '@mui/material'
+import { Card, CardMedia, CardContent, CardActions, IconButton, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button, Box } from '@mui/material'
 import { Edit, Delete } from '@mui/icons-material'
 import LinkIconButton from '@/components/LinkIconButton'
 import { useRouter } from 'next/navigation'
@@ -66,61 +66,65 @@ export default function AlbumsList({ albums }: AlbumsListProps) {
 
   return (
     <>
-      <Grid container spacing={3}>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+          gap: 3,
+        }}
+      >
         {albums.map((album) => (
-          <Grid item xs={12} sm={6} md={4} key={album.id}>
-            <Card>
-              <CardMedia
-                component="div"
-                sx={{
-                  height: 200,
-                  bgcolor: 'grey.200',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {album.coverPhoto ? (
-                  <img
-                    src={album.coverPhoto}
-                    alt={album.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                ) : (
-                  <Typography variant="body2" color="text.secondary">
-                    Bez náhledu
-                  </Typography>
-                )}
-              </CardMedia>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  {album.name}
-                </Typography>
+          <Card key={album.id}>
+            <CardMedia
+              component="div"
+              sx={{
+                height: 200,
+                bgcolor: 'grey.200',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {album.coverPhoto ? (
+                <img
+                  src={album.coverPhoto}
+                  alt={album.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
                 <Typography variant="body2" color="text.secondary">
-                  {album._count.photos} fotografií
+                  Bez náhledu
                 </Typography>
-              </CardContent>
-              <CardActions>
-                <LinkIconButton
-                  href={`/admin/gallery/${album.id}`}
-                  size="small"
-                  color="primary"
-                >
-                  <Edit />
-                </LinkIconButton>
-                <IconButton 
-                  size="small" 
-                  color="error"
-                  onClick={() => handleDeleteClick(album)}
-                  disabled={deletingId === album.id}
-                >
-                  <Delete />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </Grid>
+              )}
+            </CardMedia>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                {album.name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {album._count.photos} fotografií
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <LinkIconButton
+                href={`/admin/gallery/${album.id}`}
+                size="small"
+                color="primary"
+              >
+                <Edit />
+              </LinkIconButton>
+              <IconButton 
+                size="small" 
+                color="error"
+                onClick={() => handleDeleteClick(album)}
+                disabled={deletingId === album.id}
+              >
+                <Delete />
+              </IconButton>
+            </CardActions>
+          </Card>
         ))}
-      </Grid>
+      </Box>
 
       <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)}>
         <DialogTitle>Smazat album?</DialogTitle>

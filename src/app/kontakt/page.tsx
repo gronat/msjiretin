@@ -1,4 +1,4 @@
-import { Container, Typography, Paper, Grid, Box } from '@mui/material'
+import { Container, Typography, Paper, Box } from '@mui/material'
 import { Phone, Email, LocationOn, AccessTime } from '@mui/icons-material'
 
 export default function ContactPage() {
@@ -8,8 +8,14 @@ export default function ContactPage() {
         Kontakt
       </Typography>
 
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+          gap: 4,
+        }}
+      >
+        <Box>
           <Paper sx={{ p: 4, height: '100%' }}>
             <Typography variant="h5" gutterBottom color="primary">
               MŠ Jiřetín pod Jedlovou
@@ -72,9 +78,9 @@ export default function ContactPage() {
               </Box>
             </Box>
           </Paper>
-        </Grid>
+        </Box>
 
-        <Grid item xs={12} md={6}>
+        <Box>
           <Paper sx={{ p: 4, height: '100%' }}>
             <Typography variant="h5" gutterBottom color="primary">
               Zřizovatel
@@ -104,10 +110,9 @@ export default function ContactPage() {
               </Typography>
             </Box>
           </Paper>
-        </Grid>
+        </Box>
 
-        <Grid item xs={12}>
-          <Paper sx={{ p: 4 }}>
+        <Paper sx={{ p: 4, gridColumn: { xs: '1 / -1', md: '1 / -1' } }}>
             <Typography variant="h5" gutterBottom color="primary">
               Mapa
             </Typography>
@@ -129,9 +134,8 @@ export default function ContactPage() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </Box>
-          </Paper>
-        </Grid>
-      </Grid>
+        </Paper>
+      </Box>
     </Container>
   )
 }
