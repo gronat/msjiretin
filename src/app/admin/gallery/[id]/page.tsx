@@ -7,6 +7,8 @@ import PhotoList from '@/components/admin/PhotoList'
 import CoverPhotoUpload from '@/components/admin/CoverPhotoUpload'
 import LinkButton from '@/components/LinkButton'
 
+export const dynamic = 'force-dynamic'
+
 export default async function EditAlbumPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const album = await prisma.album.findUnique({

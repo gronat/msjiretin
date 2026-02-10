@@ -2,6 +2,8 @@ import { Container, Typography, Card, CardMedia, CardContent, Box } from '@mui/m
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic'
+
 export default async function GalleryPage() {
   const albums = await prisma.album.findMany({
     where: { published: true },

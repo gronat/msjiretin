@@ -4,6 +4,8 @@ import { prisma } from '@/lib/prisma'
 import PostsTable from '@/components/admin/PostsTable'
 import LinkButton from '@/components/LinkButton'
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminPostsPage() {
   const posts = await prisma.post.findMany({
     include: {

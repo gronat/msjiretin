@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import StaffEditor from "@/components/admin/StaffEditor";
 import { ensureStaffRoles } from "@/lib/staff";
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminStaffPage() {
   await ensureStaffRoles();
   type StaffRoleData = {

@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { Container, Typography, TextField, Button, Box, FormControlLabel, Switch } from '@mui/material'
 
+export const dynamic = 'force-dynamic'
+
 function slugify(input: string) {
   return input
     .toLowerCase()

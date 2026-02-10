@@ -4,6 +4,8 @@ import { prisma } from '@/lib/prisma'
 import DocumentsTable from '@/components/admin/DocumentsTable'
 import LinkButton from '@/components/LinkButton'
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminDocumentsPage() {
   const documents = await prisma.document.findMany({
     orderBy: {

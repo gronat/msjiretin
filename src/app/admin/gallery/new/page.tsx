@@ -4,6 +4,8 @@ import { redirect } from 'next/navigation'
 import { Container, Typography, TextField, Box, Button, FormControlLabel, Switch } from '@mui/material'
 import LinkButton from '@/components/LinkButton'
 
+export const dynamic = 'force-dynamic'
+
 function slugify(input: string) {
   return input
     .toLowerCase()

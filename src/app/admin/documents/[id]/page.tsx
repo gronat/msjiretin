@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation'
 import { Container, Typography } from '@mui/material'
 import DocumentEditForm from '@/components/admin/DocumentEditForm'
 
+export const dynamic = 'force-dynamic'
+
 export default async function EditDocumentPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const doc = await prisma.document.findUnique({
