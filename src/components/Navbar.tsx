@@ -170,7 +170,7 @@ export default function Navbar() {
                   mx: 1,
                   borderRadius: 2,
                   '&:hover': {
-                    backgroundColor: alpha(currentPreset.palette.error.main, 0.1),
+                    backgroundColor: alpha(currentPreset.palette.error?.main ?? '#d32f2f', 0.1),
                   },
                 }}
               >
@@ -354,7 +354,7 @@ export default function Navbar() {
                     backgroundColor: 'transparent',
                     '&:hover': {
                       backgroundColor: isGlassNavbar 
-                        ? alpha(currentPreset.palette.error.main, 0.1)
+                        ? alpha(currentPreset.palette.error?.main ?? '#d32f2f', 0.1)
                         : 'rgba(255,255,255,0.1)',
                     },
                     transition: 'all 0.2s ease',
