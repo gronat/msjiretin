@@ -4,6 +4,8 @@ import { prisma } from '@/lib/prisma'
 import AlbumsList from '@/components/admin/AlbumsList'
 import LinkButton from '@/components/LinkButton'
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminGalleryPage() {
   const albums = await prisma.album.findMany({
     include: {
