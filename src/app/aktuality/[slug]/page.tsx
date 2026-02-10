@@ -1,0 +1,44 @@
+import { prisma } from '@/lib/prisma'
+import { Container, Typography, Box, Divider } from '@mui/material'
+import { notFound } from 'next/navigation'
+import LinkButton from '@/components/LinkButton'
+import { unstable_noStore as noStore } from 'next/cache'
+
+export const dynamic = 'force-dynamic'
+
+export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  noStore()
+  const { slug } = await params
+
+  const post = await prisma.post.findFirst({
+    where: {
+      slug,
+      published: true,
+    },
+  })
+
+  if (!post) {
+    notFound()
+  }
+
+  return (
+    <Container maxWidth="md" sx={{ py: 8 }}>
+      <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
+        {new Date(post.publishedAt ?? post.createdAt).toLocaleDateString('cs-CZ')}
+      </Typography>
+      <Typography variant="h3" component="h1" gutterBottom>
+        {post.title}
+      </Typography>
+      <Divider sx={{ mb: 3 }} />
+      <Box sx={{ whiteSpace: 'pre-line' }}>
+        <Typography variant="body1">{post.content}</Typography>
+      </Box>
+      <Box sx={{ mt: 4 }}>
+        <LinkButton href="/aktuality" variant="outlined">
+          Zpět na aktuality
+        </LinkButton>
+      </Box>
+    </Container>
+  )
+}
+
