@@ -245,7 +245,7 @@ export const themePresets: Record<ThemePresetName, ThemePreset> = {
     },
     typography: {
       fontFamily: '"Quicksand", "Helvetica", "Arial", sans-serif',
-      headingFontFamily: '"Fredoka", "Quicksand", "Helvetica", "Arial", sans-serif',
+      headingFontFamily: '"Baloo 2", "Nunito", "Quicksand", "Helvetica", "Arial", sans-serif',
       h1: { fontSize: '3.25rem', fontWeight: 600, letterSpacing: '-0.01em', lineHeight: 1.1 },
       h2: { fontSize: '2.5rem', fontWeight: 600, letterSpacing: '0', lineHeight: 1.2 },
       h3: { fontSize: '1.875rem', fontWeight: 500, lineHeight: 1.3 },

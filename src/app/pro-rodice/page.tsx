@@ -61,7 +61,7 @@ export default function ForParentsPage() {
 
         <Box sx={{ pl: { xs: 2, sm: 4, md: 9 } }}>
           <Typography variant="h5" sx={{ fontWeight: 600, mb: 2, color: 'primary.main' }}>
-            Pondělí - Pátek: 6:15 - 15:30
+            6:15 - 15:30
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
             Prosíme o včasné přivádění dětí (nejpozději do 8:00), aby se mohly zapojit do ranního programu.
@@ -412,6 +412,9 @@ export default function ForParentsPage() {
               <Typography variant="h5" sx={{ fontWeight: 700, color: 'primary.main' }}>
                 Měsíčně 200 Kč
               </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                KB č. ú.: 107-8908630287/0100
+              </Typography>
             </Box>
             <Alert severity="info" sx={{ mt: 2 }}>
               Děti v posledním roce předškolního vzdělávání a děti s odkladem školní docházky úplatu nehradí!
@@ -443,6 +446,9 @@ export default function ForParentsPage() {
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                 se platí měsíc předem
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                KB č. ú.: 107-7487260227/0100
               </Typography>
             </Box>
 

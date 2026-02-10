@@ -4,6 +4,7 @@ import { Container, Typography, Box, Paper, alpha, Divider } from '@mui/material
 import { useTheme } from '@mui/material/styles'
 import { useThemePreset } from '@/components/ThemeRegistry'
 import { School, Sports, Nature, DirectionsBus } from '@mui/icons-material'
+import { applyCzechTypography } from '@/lib/czechTypography'
 
 export default function AboutPage() {
   const theme = useTheme()
@@ -60,7 +61,9 @@ export default function AboutPage() {
 
         <Box sx={{ pl: { xs: 2, sm: 4, md: 9 } }}>
           <Typography variant="body1" paragraph sx={{ lineHeight: 1.8, mb: 2 }}>
-            Naše mateřská škola se nachází v areálu sportoviště obce Jiřetín pod Jedlovou, což nám dává jedinečnou možnost trávit s dětmi většinu dne venku. K dispozici máme vlastní uzamčenou zahradu s pískovištěm a dřevěnými herními prvky a zároveň můžeme využívat celý sportovní areál včetně hřišť. Díky tomu si děti každý den užívají pestré pohybové aktivity v průběhu všech ročních období.
+            {applyCzechTypography(
+              'Naše mateřská škola se nachází v areálu sportoviště obce Jiřetín pod Jedlovou, což nám dává jedinečnou možnost trávit s dětmi většinu dne venku. K dispozici máme vlastní uzamčenou zahradu s pískovištěm a dřevěnými herními prvky a zároveň můžeme využívat celý sportovní areál včetně hřišť. Díky tomu si děti každý den užívají pestré pohybové aktivity v průběhu všech ročních období.',
+            )}
           </Typography>
           
           <Typography variant="body1" paragraph sx={{ lineHeight: 1.8, mb: 2 }}>
@@ -165,11 +168,8 @@ export default function AboutPage() {
             </Box>
 
             <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5, color: 'primary.main' }}>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: 'primary.main' }}>
                 Poznávací výlety
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, fontSize: '0.875rem' }}>
-                Knihovny v blízkém okolí, IQ park
               </Typography>
             </Box>
 
@@ -185,15 +185,6 @@ export default function AboutPage() {
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, fontSize: '0.875rem' }}>
                 Sportovní olympiáda, den s hasiči
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5, color: 'primary.main' }}>
-                Spolupráce s MŠ Horní Podluží
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, fontSize: '0.875rem' }}>
-                Výlety, sportovní den...
               </Typography>
             </Box>
 

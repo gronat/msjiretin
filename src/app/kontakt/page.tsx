@@ -67,7 +67,7 @@ export default function ContactPage() {
                   Provozní doba
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Pondělí - Pátek: 6:30 - 16:30
+                  6:15 - 15:30
                 </Typography>
               </Box>
             </Box>
@@ -100,7 +100,7 @@ export default function ContactPage() {
                 <strong>IČO:</strong> 727 43 093
               </Typography>
               <Typography variant="body2" paragraph>
-                <strong>Název:</strong> MŠ Jiřetín pod Jedlovou, příspěvková organizace
+                <strong>Název:</strong> MŠ Jiřetín pod Jedlovou, okres Děčín, příspěvková organizace
               </Typography>
             </Box>
           </Paper>

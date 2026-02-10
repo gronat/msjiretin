@@ -204,7 +204,7 @@ export default function FeaturesSection({
                     zIndex: 10,
                     // Show expanded content on hover
                     "& .expanded-content": {
-                      maxHeight: 200,
+                      maxHeight: 420,
                       opacity: 1,
                     },
                   },
