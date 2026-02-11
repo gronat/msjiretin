@@ -68,11 +68,33 @@ export default function StaffEditor({ roles }: { roles: StaffRole[] }) {
     }));
   };
 
-  const handleRemoveMember = (roleId: string, index: number) => {
-    updateRoleState(roleId, (role) => ({
-      ...role,
-      members: role.members.filter((_, i) => i !== index),
+  const handleRemoveMember = async (roleId: string, index: number) => {
+    const role = roleState.find((r) => r.id === roleId);
+    const member = role?.members[index];
+
+    // If the member exists in the database, delete it via API
+    if (member?.id) {
+      try {
+        const response = await fetch(`/api/admin/staff/members/${member.id}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          setError("Smazání zaměstnance selhalo");
+          return;
+        }
+      } catch {
+        setError("Smazání zaměstnance selhalo");
+        return;
+      }
+    }
+
+    // Remove from local state
+    updateRoleState(roleId, (r) => ({
+      ...r,
+      members: r.members.filter((_, i) => i !== index),
     }));
+
+    router.refresh();
   };
 
   const handleSaveRole = async (role: RoleState) => {
