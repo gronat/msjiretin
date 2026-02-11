@@ -9,6 +9,13 @@ import {
   Paper,
   IconButton,
   Divider,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { Add, Delete } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
@@ -40,6 +47,17 @@ export default function StaffEditor({ roles }: { roles: StaffRole[] }) {
   const [roleState, setRoleState] = useState<RoleState[]>(roles);
   const [savingId, setSavingId] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [deleteTarget, setDeleteTarget] = useState<{
+    roleId: string;
+    index: number;
+    name: string;
+  } | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [snackbar, setSnackbar] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "error";
+  }>({ open: false, message: "", severity: "success" });
   const sortedRoles = useMemo(
     () => [...roleState].sort((a, b) => a.order - b.order),
     [roleState],
@@ -68,32 +86,73 @@ export default function StaffEditor({ roles }: { roles: StaffRole[] }) {
     }));
   };
 
-  const handleRemoveMember = async (roleId: string, index: number) => {
+  const handleRemoveClick = (roleId: string, index: number) => {
     const role = roleState.find((r) => r.id === roleId);
     const member = role?.members[index];
 
-    // If the member exists in the database, delete it via API
+    // If member is new (not saved yet), remove directly without confirmation
+    if (!member?.id) {
+      updateRoleState(roleId, (r) => ({
+        ...r,
+        members: r.members.filter((_, i) => i !== index),
+      }));
+      return;
+    }
+
+    setDeleteTarget({
+      roleId,
+      index,
+      name: member.name || "zaměstnance",
+    });
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deleteTarget) return;
+
+    setDeleting(true);
+    const role = roleState.find((r) => r.id === deleteTarget.roleId);
+    const member = role?.members[deleteTarget.index];
+
     if (member?.id) {
       try {
         const response = await fetch(`/api/admin/staff/members/${member.id}`, {
           method: "DELETE",
         });
         if (!response.ok) {
-          setError("Smazání zaměstnance selhalo");
+          setSnackbar({
+            open: true,
+            message: "Smazání zaměstnance selhalo",
+            severity: "error",
+          });
+          setDeleting(false);
+          setDeleteTarget(null);
           return;
         }
       } catch {
-        setError("Smazání zaměstnance selhalo");
+        setSnackbar({
+          open: true,
+          message: "Smazání zaměstnance selhalo",
+          severity: "error",
+        });
+        setDeleting(false);
+        setDeleteTarget(null);
         return;
       }
     }
 
     // Remove from local state
-    updateRoleState(roleId, (r) => ({
+    updateRoleState(deleteTarget.roleId, (r) => ({
       ...r,
-      members: r.members.filter((_, i) => i !== index),
+      members: r.members.filter((_, i) => i !== deleteTarget.index),
     }));
 
+    setSnackbar({
+      open: true,
+      message: `${deleteTarget.name} byl/a úspěšně odebrán/a`,
+      severity: "success",
+    });
+    setDeleting(false);
+    setDeleteTarget(null);
     router.refresh();
   };
 
@@ -282,7 +341,7 @@ export default function StaffEditor({ roles }: { roles: StaffRole[] }) {
                         />
                         <IconButton
                           color="error"
-                          onClick={() => handleRemoveMember(role.id, index)}
+                          onClick={() => handleRemoveClick(role.id, index)}
                           aria-label="Odebrat"
                         >
                           <Delete />
@@ -304,6 +363,54 @@ export default function StaffEditor({ roles }: { roles: StaffRole[] }) {
           {error}
         </Typography>
       )}
+
+      {/* Potvrzovací dialog pro smazání */}
+      <Dialog
+        open={!!deleteTarget}
+        onClose={() => !deleting && setDeleteTarget(null)}
+      >
+        <DialogTitle>Smazat zaměstnance?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Opravdu chcete odebrat{" "}
+            <strong>{deleteTarget?.name}</strong>? Tuto akci nelze vrátit
+            zpět.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setDeleteTarget(null)}
+            disabled={deleting}
+          >
+            Zrušit
+          </Button>
+          <Button
+            onClick={handleConfirmDelete}
+            color="error"
+            variant="contained"
+            disabled={deleting}
+          >
+            {deleting ? "Mažu..." : "Smazat"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Oznámení o výsledku */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={4000}
+        onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
+          severity={snackbar.severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
