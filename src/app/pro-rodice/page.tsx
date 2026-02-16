@@ -409,10 +409,16 @@ export default function ForParentsPage() {
                 border: `2px solid ${alpha(theme.palette.primary.main, 0.2)}`,
               }}
             >
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                Měsíční platba
+              </Typography>
               <Typography variant="h5" sx={{ fontWeight: 700, color: 'primary.main' }}>
-                Měsíčně 200 Kč
+                200 Kč
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                platí se do 5. dne daného měsíce
+              </Typography>
+              <Typography variant="body1" sx={{ mt: 1, fontWeight: 700, fontSize: '1.1rem' }}>
                 KB č. ú.: 107-8908630287/0100
               </Typography>
             </Box>
@@ -445,9 +451,9 @@ export default function ForParentsPage() {
                 1 300 Kč
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                se platí měsíc předem
+                platí se do 20. dne předešlého měsíce
               </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+              <Typography variant="body1" sx={{ mt: 1, fontWeight: 700, fontSize: '1.1rem' }}>
                 KB č. ú.: 107-7487260227/0100
               </Typography>
             </Box>

@@ -62,16 +62,16 @@ export default function AboutPage() {
         <Box sx={{ pl: { xs: 2, sm: 4, md: 9 } }}>
           <Typography variant="body1" paragraph sx={{ lineHeight: 1.8, mb: 2 }}>
             {applyCzechTypography(
-              'Naše mateřská škola se nachází v areálu sportoviště obce Jiřetín pod Jedlovou, což nám dává jedinečnou možnost trávit s dětmi většinu dne venku. K dispozici máme vlastní uzamčenou zahradu s pískovištěm a dřevěnými herními prvky a zároveň můžeme využívat celý sportovní areál včetně hřišť. Díky tomu si děti každý den užívají pestré pohybové aktivity v průběhu všech ročních období.',
+              'Naše mateřská škola se nachází ve sportovním areálu obce Jiřetín pod Jedlovou, což nám dává jedinečnou možnost trávit s dětmi většinu dne venku. K dispozici máme vlastní uzamčenou zahradu s pískovištěm a dřevěnými herními prvky a zároveň využíváme celý sportovní areál včetně hřišť. Díky tomu si děti každý den užívají pestré pohybové aktivity v průběhu všech ročních období.',
             )}
           </Typography>
           
           <Typography variant="body1" paragraph sx={{ lineHeight: 1.8, mb: 2 }}>
-            Rádi vyrážíme i mimo areál – v okolí školky máme „naše" lesíky, kde si děti hrají, objevují přírodu a učí se venku. Navštěvujeme také Rekreační středisko Netopýr, kde se děti setkávají se zvířaty, hrají si u potoka a zažívají malé dobrodružné výpravy.
+            Rádi vyrážíme i mimo areál – v okolí školky máme „naše" lesíky, kde si děti hrají, objevují přírodu a učí se venku. Rádi zavítáme i do rekreačního střediska Netopýr – děti se tam setkávají se zvířaty, hrají si u potoka a vydávají se na malé dobrodružné výpravy.
           </Typography>
 
           <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-            Školka má jednu heterogenní třídu pro děti ve věku 3–7 let s maximálním počtem 25 dětí. Součástí budovy je také tělocvična, kterou pravidelně využíváme. Dostupnost je snadná – autem (velké parkoviště) i autobusem, zastávka je přibližně 7 minut chůze.
+            Školka má jednu heterogenní třídu pro děti ve věku 3–7 let s maximálním počtem 25 dětí. Součástí budovy je také tělocvična, kterou můžeme využívat. Dostupnost je snadná – autem (velké parkoviště) i autobusem, zastávka je přibližně 7 minut chůze.
           </Typography>
         </Box>
       </Paper>
