@@ -1,5 +1,5 @@
-import { Container, Typography, Paper, List, ListItem, ListItemIcon, ListItemText, Box } from '@mui/material'
-import { Description, PictureAsPdf } from '@mui/icons-material'
+import { Container, Typography, Paper, List, ListItem, ListItemIcon, ListItemText, IconButton, Box } from '@mui/material'
+import { Description, PictureAsPdf, Download } from '@mui/icons-material'
 import { prisma } from '@/lib/prisma'
 import SVPSection from '@/components/SVPSection'
 import GDPRSection from '@/components/GDPRSection'
@@ -11,18 +11,26 @@ export default async function DocumentsPage() {
     orderBy: { createdAt: 'desc' }
   })
   const svpCategory = 'školní vzdělávací plán'
+  const schoolRulesCategory = 'školní řád'
+  const mapDoc = (doc: typeof documents[number]) => ({
+    id: doc.id,
+    title: doc.title,
+    description: doc.description,
+    filename: doc.filename,
+    path: doc.path,
+    size: doc.size,
+  })
   const svpDocuments = documents
     .filter((doc) => (doc.category || '').trim().toLowerCase() === svpCategory)
-    .map((doc) => ({
-      id: doc.id,
-      title: doc.title,
-      description: doc.description,
-      filename: doc.filename,
-      path: doc.path,
-      size: doc.size,
-    }))
+    .map(mapDoc)
+  const schoolRulesDocuments = documents
+    .filter((doc) => (doc.category || '').trim().toLowerCase() === schoolRulesCategory)
+    .map(mapDoc)
   const generalDocuments = documents.filter(
-    (doc) => (doc.category || '').trim().toLowerCase() !== svpCategory
+    (doc) => {
+      const cat = (doc.category || '').trim().toLowerCase()
+      return cat !== svpCategory && cat !== schoolRulesCategory
+    }
   )
 
   const formatFileSize = (bytes?: number | null) => {
@@ -43,7 +51,7 @@ export default async function DocumentsPage() {
       </Typography>
 
       {/* ŠVP Section */}
-      <SVPSection documents={svpDocuments} />
+      <SVPSection documents={svpDocuments} schoolRulesDocuments={schoolRulesDocuments} />
 
       <Paper sx={{ p: 4, mt: 4 }}>
         <Typography variant="h5" gutterBottom color="primary" sx={{ mb: 3 }}>
@@ -69,6 +77,11 @@ export default async function DocumentsPage() {
                     bgcolor: 'action.hover',
                   },
                 }}
+                secondaryAction={
+                  <IconButton size="small" color="default" component="a" href={doc.path} target="_blank" rel="noreferrer">
+                    <Download />
+                  </IconButton>
+                }
               >
                 <ListItemIcon>
                   {getFileIcon(doc.filename)}

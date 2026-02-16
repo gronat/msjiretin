@@ -402,7 +402,7 @@ export default function ForParentsPage() {
             <Box
               sx={{
                 backgroundColor: alpha(theme.palette.primary.main, 0.1),
-                borderRadius: Math.min(currentPreset.components.card.borderRadius, 8),
+                borderRadius: 4,
                 p: 3,
                 pl: { xs: 3, md: 8 },
                 mb: 2,
@@ -437,7 +437,7 @@ export default function ForParentsPage() {
             <Box
               sx={{
                 backgroundColor: alpha(theme.palette.secondary.main, 0.1),
-                borderRadius: Math.min(currentPreset.components.card.borderRadius, 8),
+                borderRadius: 4,
                 p: 3,
                 pl: { xs: 3, md: 8 },
                 mb: 3,

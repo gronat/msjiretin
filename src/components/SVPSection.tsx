@@ -1,7 +1,7 @@
 'use client'
 
-import { Paper, Typography, Box, List, ListItem, ListItemIcon, ListItemText, alpha } from '@mui/material'
-import { Description, MenuBook, PictureAsPdf } from '@mui/icons-material'
+import { Paper, Typography, Box, List, ListItem, ListItemIcon, ListItemText, IconButton, alpha } from '@mui/material'
+import { Description, MenuBook, PictureAsPdf, Download } from '@mui/icons-material'
 import { useTheme } from '@mui/material/styles'
 import { useThemePreset } from '@/components/ThemeRegistry'
 
@@ -14,7 +14,7 @@ type SVPDocument = {
   size: number | null
 }
 
-export default function SVPSection({ documents = [] }: { documents?: SVPDocument[] }) {
+export default function SVPSection({ documents = [], schoolRulesDocuments = [] }: { documents?: SVPDocument[], schoolRulesDocuments?: SVPDocument[] }) {
   const theme = useTheme()
   const { currentPreset } = useThemePreset()
 
@@ -107,9 +107,9 @@ export default function SVPSection({ documents = [] }: { documents?: SVPDocument
           <Box
             sx={{
               backgroundColor: alpha(theme.palette.primary.main, 0.05),
-              borderRadius: Math.min(currentPreset.components.card.borderRadius, 8),
-              p: { xs: 2, md: 3 },
-              pl: { xs: 3, md: 8 },
+              borderRadius: 4,
+              p: { xs: 2, sm: 3, md: 3 },
+              pl: { xs: 2, sm: 3, md: 4 },
               border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
             }}
           >
@@ -165,6 +165,60 @@ export default function SVPSection({ documents = [] }: { documents?: SVPDocument
                       bgcolor: 'action.hover',
                     },
                   }}
+                  secondaryAction={
+                    <IconButton size="small" color="default" component="a" href={doc.path} target="_blank" rel="noreferrer">
+                      <Download />
+                    </IconButton>
+                  }
+                >
+                  <ListItemIcon>
+                    {getFileIcon(doc.filename)}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <a href={doc.path} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        {doc.title}
+                      </a>
+                    }
+                    secondary={
+                      <>
+                        {doc.description && <span>{doc.description} • </span>}
+                        {formatFileSize(doc.size)}
+                      </>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </Box>
+
+        <Box sx={{ mt: 5 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, color: 'primary.main' }}>
+            Školní řád
+          </Typography>
+          {schoolRulesDocuments.length === 0 ? (
+            <Typography variant="body2" color="text.secondary">
+              Zatím nejsou k dispozici žádné dokumenty.
+            </Typography>
+          ) : (
+            <List>
+              {schoolRulesDocuments.map((doc) => (
+                <ListItem
+                  key={doc.id}
+                  sx={{
+                    border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
+                    borderRadius: 1,
+                    mb: 1,
+                    '&:hover': {
+                      bgcolor: 'action.hover',
+                    },
+                  }}
+                  secondaryAction={
+                    <IconButton size="small" color="default" component="a" href={doc.path} target="_blank" rel="noreferrer">
+                      <Download />
+                    </IconButton>
+                  }
                 >
                   <ListItemIcon>
                     {getFileIcon(doc.filename)}

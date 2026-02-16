@@ -51,7 +51,7 @@ export default function GDPRSection() {
           <Box
             sx={{
               backgroundColor: alpha(theme.palette.primary.main, 0.05),
-              borderRadius: Math.min(currentPreset.components.card.borderRadius, 8),
+              borderRadius: 4,
               p: { xs: 2, md: 3 },
               pl: { xs: 3, md: 8 },
               border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
@@ -118,7 +118,7 @@ export default function GDPRSection() {
           <Box
             sx={{
               backgroundColor: alpha(theme.palette.secondary.main, 0.05),
-              borderRadius: Math.min(currentPreset.components.card.borderRadius, 8),
+              borderRadius: 4,
               p: { xs: 2, md: 3 },
               pl: { xs: 3, md: 8 },
               border: `1px solid ${alpha(theme.palette.secondary.main, 0.1)}`,

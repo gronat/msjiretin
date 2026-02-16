@@ -157,7 +157,7 @@ export default function Footer() {
             <Box
               sx={{
                 backgroundColor: 'rgba(255,255,255,0.08)',
-                borderRadius: Math.min(currentPreset.components.card.borderRadius, 8),
+                borderRadius: 4,
                 p: 2.5,
                 pl: { xs: 3, md: 8 },
                 border: '1px solid rgba(255,255,255,0.1)',

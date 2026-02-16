@@ -180,7 +180,7 @@ export default function PaymentSection() {
               color: theme.palette.text.primary,
               px: 3,
               py: 1.5,
-              borderRadius: Math.min(currentPreset.components.card.borderRadius, 8),
+              borderRadius: 4,
               border: `1px solid ${alpha(theme.palette.warning.main, 0.3)}`,
             }}
           >

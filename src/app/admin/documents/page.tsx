@@ -13,11 +13,18 @@ export default async function AdminDocumentsPage() {
     },
   })
   const svpCategory = 'školní vzdělávací plán'
+  const schoolRulesCategory = 'školní řád'
   const svpDocuments = documents.filter(
     (doc) => (doc.category || '').trim().toLowerCase() === svpCategory
   )
+  const schoolRulesDocuments = documents.filter(
+    (doc) => (doc.category || '').trim().toLowerCase() === schoolRulesCategory
+  )
   const generalDocuments = documents.filter(
-    (doc) => (doc.category || '').trim().toLowerCase() !== svpCategory
+    (doc) => {
+      const cat = (doc.category || '').trim().toLowerCase()
+      return cat !== svpCategory && cat !== schoolRulesCategory
+    }
   )
 
   return (
@@ -51,6 +58,21 @@ export default async function AdminDocumentsPage() {
       </Box>
 
       <DocumentsTable documents={svpDocuments} />
+
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 6, mb: 3 }}>
+        <Typography variant="h5" component="h2">
+          Školní řád
+        </Typography>
+        <LinkButton
+          href={`/admin/documents/new?category=${encodeURIComponent('Školní řád')}`}
+          variant="outlined"
+          startIcon={<Add />}
+        >
+          Nahrát školní řád
+        </LinkButton>
+      </Box>
+
+      <DocumentsTable documents={schoolRulesDocuments} />
     </Container>
   )
 }
