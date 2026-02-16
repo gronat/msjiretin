@@ -8,7 +8,7 @@ import Providers from "./providers";
 import { Box } from "@mui/material";
 
 const siteUrl = 'https://msjiretin.cz'
-const siteName = 'MŠ Jiřetín pod Jedlovou - SMÍŠEK | Školka ve sportovním areálu'
+const siteName = 'MŠ Jiřetín pod Jedlovou - SMÍŠEK | Školka v areálu'
 const siteDescription = 'Mateřská škola Jiřetín pod Jedlovou - bezpečné a podnětné prostředí pro děti ve sportovním areálu obce v CHKO Lužických hor.'
 const ogImage = {
   url: '/og-msjiretin.jpg',
