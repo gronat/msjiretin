@@ -15,7 +15,7 @@ const ogImage = {
   width: 1200,
   height: 630,
   alt: 'MŠ Jiřetín pod Jedlovou – SMÍŠEK',
-} satisfies NonNullable<NonNullable<Metadata['openGraph']>['images']>[number]
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
