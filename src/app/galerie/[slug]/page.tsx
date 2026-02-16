@@ -3,8 +3,30 @@ import { Container, Typography, Box, Card, CardMedia, CardContent, Divider } fro
 import { notFound } from 'next/navigation'
 import LinkButton from '@/components/LinkButton'
 import { unstable_noStore as noStore } from 'next/cache'
+import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const album = await prisma.album.findUnique({
+    where: { slug },
+    select: { name: true, description: true, coverPhoto: true },
+  })
+
+  if (!album || !album) return { title: 'Album nenalezeno' }
+
+  return {
+    title: album.name,
+    description: album.description || `Fotogalerie ${album.name} - MŠ Jiřetín pod Jedlovou`,
+    alternates: { canonical: `/galerie/${slug}` },
+    openGraph: {
+      title: album.name,
+      description: album.description || `Fotogalerie ${album.name}`,
+      ...(album.coverPhoto ? { images: [{ url: album.coverPhoto }] } : {}),
+    },
+  }
+}
 
 export default async function GalleryAlbumPage({ params }: { params: Promise<{ slug: string }> }) {
   noStore()

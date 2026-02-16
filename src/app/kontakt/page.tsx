@@ -1,5 +1,12 @@
 import { Container, Typography, Paper, Box } from '@mui/material'
 import { Phone, Email, LocationOn, AccessTime } from '@mui/icons-material'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Kontakt',
+  description: 'Kontaktní údaje MŠ Jiřetín pod Jedlovou - adresa, telefon, email, provozní doba.',
+  alternates: { canonical: '/kontakt' },
+}
 
 export default function ContactPage() {
   return (

@@ -2,6 +2,13 @@ import { prisma } from '@/lib/prisma'
 import { Container, Typography, Card, CardContent, Box, Divider } from '@mui/material'
 import { unstable_noStore as noStore } from 'next/cache'
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Aktuality',
+  description: 'Novinky a aktuality z MŠ Jiřetín pod Jedlovou - akce, oznámení a důležité informace pro rodiče.',
+  alternates: { canonical: '/aktuality' },
+}
 
 export const dynamic = 'force-dynamic'
 

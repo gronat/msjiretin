@@ -3,6 +3,13 @@ import { Description, PictureAsPdf, Download } from '@mui/icons-material'
 import { prisma } from '@/lib/prisma'
 import SVPSection from '@/components/SVPSection'
 import GDPRSection from '@/components/GDPRSection'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Dokumenty',
+  description: 'Školní vzdělávací plán, školní řád a další dokumenty MŠ Jiřetín pod Jedlovou ke stažení.',
+  alternates: { canonical: '/dokumenty' },
+}
 
 export const dynamic = 'force-dynamic'
 

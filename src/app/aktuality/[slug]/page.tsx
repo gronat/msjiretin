@@ -3,8 +3,32 @@ import { Container, Typography, Box, Divider } from '@mui/material'
 import { notFound } from 'next/navigation'
 import LinkButton from '@/components/LinkButton'
 import { unstable_noStore as noStore } from 'next/cache'
+import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = await prisma.post.findFirst({
+    where: { slug, published: true },
+    select: { title: true, excerpt: true, content: true },
+  })
+
+  if (!post) return { title: 'Článek nenalezen' }
+
+  const description = post.excerpt || post.content.substring(0, 160).replace(/\n/g, ' ')
+
+  return {
+    title: post.title,
+    description,
+    alternates: { canonical: `/aktuality/${slug}` },
+    openGraph: {
+      title: post.title,
+      description,
+      type: 'article',
+    },
+  }
+}
 
 export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   noStore()

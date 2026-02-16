@@ -7,9 +7,39 @@ import Footer from "@/components/Footer";
 import Providers from "./providers";
 import { Box } from "@mui/material";
 
+const siteUrl = 'https://msjiretin.cz'
+const siteName = 'MŠ Jiřetín pod Jedlovou - SMÍŠEK'
+const siteDescription = 'Mateřská škola Jiřetín pod Jedlovou - bezpečné a podnětné prostředí pro děti ve sportovním areálu obce v CHKO Lužických hor.'
+
 export const metadata: Metadata = {
-  title: "MŠ Jiřetín pod Jedlovou - SMÍŠEK",
-  description: "Mateřská škola Jiřetín pod Jedlovou - bezpečné a podnětné prostředí pro děti",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteName,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
+  keywords: ['mateřská škola', 'Jiřetín pod Jedlovou', 'SMÍŠEK', 'školka', 'předškolní vzdělávání', 'Lužické hory', 'Děčín'],
+  authors: [{ name: siteName }],
+  openGraph: {
+    type: 'website',
+    locale: 'cs_CZ',
+    url: siteUrl,
+    siteName,
+    title: siteName,
+    description: siteDescription,
+  },
+  twitter: {
+    card: 'summary',
+    title: siteName,
+    description: siteDescription,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
 };
 
 export default function RootLayout({
@@ -28,6 +58,37 @@ export default function RootLayout({
         />
       </head>
       <body style={{ margin: 0, display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'School',
+              name: 'Mateřská škola Jiřetín pod Jedlovou',
+              alternateName: 'MŠ SMÍŠEK',
+              url: 'https://msjiretin.cz',
+              description: siteDescription,
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'Školní 273',
+                addressLocality: 'Jiřetín pod Jedlovou',
+                postalCode: '407 56',
+                addressCountry: 'CZ',
+              },
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: 50.8625,
+                longitude: 14.5681,
+              },
+              telephone: '+420702152232',
+              email: 'skolka@jiretin.cz',
+              isPartOf: {
+                '@type': 'Organization',
+                name: 'MŠ Jiřetín pod Jedlovou, okres Děčín, příspěvková organizace',
+              },
+            }),
+          }}
+        />
         <Providers>
           <ThemeRegistry>
             <Navbar />

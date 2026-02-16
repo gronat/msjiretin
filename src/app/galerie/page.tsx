@@ -1,6 +1,13 @@
 import { Container, Typography, Card, CardMedia, CardContent, Box } from '@mui/material'
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Galerie',
+  description: 'Fotogalerie z akcí a života v MŠ Jiřetín pod Jedlovou.',
+  alternates: { canonical: '/galerie' },
+}
 
 export const dynamic = 'force-dynamic'
 
