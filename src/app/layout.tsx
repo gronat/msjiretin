@@ -8,8 +8,14 @@ import Providers from "./providers";
 import { Box } from "@mui/material";
 
 const siteUrl = 'https://msjiretin.cz'
-const siteName = 'MŠ Jiřetín pod Jedlovou - SMÍŠEK'
+const siteName = 'MŠ Jiřetín pod Jedlovou - SMÍŠEK | Školka ve sportovním areálu'
 const siteDescription = 'Mateřská škola Jiřetín pod Jedlovou - bezpečné a podnětné prostředí pro děti ve sportovním areálu obce v CHKO Lužických hor.'
+const ogImage = {
+  url: '/og-msjiretin.jpg',
+  width: 1200,
+  height: 630,
+  alt: 'MŠ Jiřetín pod Jedlovou – SMÍŠEK',
+} satisfies NonNullable<NonNullable<Metadata['openGraph']>['images']>[number]
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -27,11 +33,13 @@ export const metadata: Metadata = {
     siteName,
     title: siteName,
     description: siteDescription,
+    images: [ogImage],
   },
   twitter: {
     card: 'summary',
     title: siteName,
     description: siteDescription,
+    images: [ogImage.url],
   },
   robots: {
     index: true,

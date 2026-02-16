@@ -16,6 +16,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!album || !album) return { title: 'Album nenalezeno' }
 
+  const ogImages = album.coverPhoto
+    ? [{ url: album.coverPhoto }]
+    : [{ url: '/og-msjiretin.jpg', width: 1200, height: 630, alt: 'MŠ Jiřetín pod Jedlovou – SMÍŠEK' }]
+
   return {
     title: album.name,
     description: album.description || `Fotogalerie ${album.name} - MŠ Jiřetín pod Jedlovou`,
@@ -23,7 +27,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: album.name,
       description: album.description || `Fotogalerie ${album.name}`,
-      ...(album.coverPhoto ? { images: [{ url: album.coverPhoto }] } : {}),
+      images: ogImages,
+    },
+    twitter: {
+      card: 'summary',
+      title: album.name,
+      description: album.description || `Fotogalerie ${album.name}`,
+      images: album.coverPhoto ? [album.coverPhoto] : ['/og-msjiretin.jpg'],
     },
   }
 }

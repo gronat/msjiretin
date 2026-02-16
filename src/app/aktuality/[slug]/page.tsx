@@ -26,6 +26,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: post.title,
       description,
       type: 'article',
+      images: [{ url: '/og-msjiretin.jpg', width: 1200, height: 630, alt: 'MŠ Jiřetín pod Jedlovou – SMÍŠEK' }],
+    },
+    twitter: {
+      card: 'summary',
+      title: post.title,
+      description,
+      images: ['/og-msjiretin.jpg'],
     },
   }
 }
