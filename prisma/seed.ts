@@ -5,24 +5,31 @@ import bcrypt from 'bcryptjs'
 const prisma = new PrismaClient()
 
 async function main() {
-  // Create admin user
-  const hashedPassword = await bcrypt.hash('admin123', 10)
-  
-  const admin = await prisma.user.upsert({
-    where: { email: 'admin@jiretin.cz' },
-    update: {},
-    create: {
-      email: 'admin@jiretin.cz',
-      name: 'Administrátor',
-      password: hashedPassword,
-      role: 'admin',
-    },
+  // Create admin user only if it doesn't exist
+  const existingAdmin = await prisma.user.findUnique({
+    where: { email: 'admin@jiretin.cz' }
   })
 
-  console.log('✅ Admin user created:', admin.email)
-  console.log('📧 Email: admin@jiretin.cz')
-  console.log('🔑 Password: admin123')
-  console.log('⚠️  Please change the password after first login!')
+  if (!existingAdmin) {
+    const defaultPassword = process.env.ADMIN_DEFAULT_PASSWORD || 'admin123'
+    const hashedPassword = await bcrypt.hash(defaultPassword, 10)
+    
+    const admin = await prisma.user.create({
+      data: {
+        email: 'admin@jiretin.cz',
+        name: 'Administrátor',
+        password: hashedPassword,
+        role: 'admin',
+      },
+    })
+
+    console.log('✅ Admin user created:', admin.email)
+    console.log('📧 Email: admin@jiretin.cz')
+    console.log('🔑 Default Password:', defaultPassword)
+    console.log('⚠️  CRITICAL: Change the password immediately after first login!')
+  } else {
+    console.log('ℹ️  Admin user already exists, skipping creation')
+  }
 
   // Create sample pages
   const pages = [
