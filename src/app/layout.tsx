@@ -24,8 +24,28 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
-  keywords: ['mateřská škola', 'Jiřetín pod Jedlovou', 'SMÍŠEK', 'školka', 'předškolní vzdělávání', 'Lužické hory', 'Děčín'],
+  keywords: [
+    'mateřská škola', 
+    'Jiřetín pod Jedlovou', 
+    'SMÍŠEK', 
+    'školka', 
+    'předškolní vzdělávání', 
+    'Lužické hory', 
+    'Děčín',
+    'ms jiretin',
+    'mš jiřetín',
+    'školka jiřetín',
+    'mateřská škola děčín',
+    'předškolní vzdělávání lužické hory'
+  ],
   authors: [{ name: siteName }],
+  creator: siteName,
+  publisher: siteName,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     type: 'website',
     locale: 'cs_CZ',
@@ -36,7 +56,7 @@ export const metadata: Metadata = {
     images: [ogImage],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: siteName,
     description: siteDescription,
     images: [ogImage.url],
@@ -44,9 +64,20 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   alternates: {
     canonical: siteUrl,
+  },
+  verification: {
+    // Přidejte zde Google Search Console verification meta tag pokud ho máte
+    // google: 'your-google-verification-code',
   },
 };
 
@@ -71,15 +102,18 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'School',
+              '@type': ['School', 'EducationalOrganization'],
               name: 'Mateřská škola Jiřetín pod Jedlovou',
-              alternateName: 'MŠ SMÍŠEK',
+              alternateName: ['MŠ SMÍŠEK', 'MŠ Jiřetín pod Jedlovou', 'MS Jiretin'],
               url: 'https://msjiretin.cz',
               description: siteDescription,
+              image: 'https://msjiretin.cz/og-msjiretin.jpg',
+              logo: 'https://msjiretin.cz/og-msjiretin.jpg',
               address: {
                 '@type': 'PostalAddress',
                 streetAddress: 'Školní 273',
                 addressLocality: 'Jiřetín pod Jedlovou',
+                addressRegion: 'Ústecký kraj',
                 postalCode: '407 56',
                 addressCountry: 'CZ',
               },
@@ -88,12 +122,44 @@ export default function RootLayout({
                 latitude: 50.8625,
                 longitude: 14.5681,
               },
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+420702152232',
+                email: 'skolka@jiretin.cz',
+                contactType: 'customer service',
+                availableLanguage: 'Czech',
+              },
               telephone: '+420702152232',
               email: 'skolka@jiretin.cz',
+              foundingDate: '2010',
+              numberOfEmployees: '5',
+              serviceArea: {
+                '@type': 'Place',
+                name: 'Jiřetín pod Jedlovou a okolí',
+              },
+              educationalCredentialAwarded: 'Předškolní vzdělávání',
+              hasOfferCatalog: {
+                '@type': 'OfferCatalog',
+                name: 'Vzdělávací program',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Course',
+                      name: 'Předškolní vzdělávání',
+                      description: 'Komplexní předškolní vzdělávání pro děti 3-6 let',
+                    },
+                  },
+                ],
+              },
               isPartOf: {
                 '@type': 'Organization',
                 name: 'MŠ Jiřetín pod Jedlovou, okres Děčín, příspěvková organizace',
               },
+              sameAs: [
+                'https://msjiretin.cz',
+              ],
+              keywords: 'mateřská škola, Jiřetín pod Jedlovou, SMÍŠEK, předškolní vzdělávání, Lužické hory',
             }),
           }}
         />

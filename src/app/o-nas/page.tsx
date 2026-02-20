@@ -1,283 +1,125 @@
-'use client'
+import { Container, Typography, Box, Card, CardContent } from "@mui/material";
+import type { Metadata } from "next";
 
-import { Container, Typography, Box, Paper, alpha, Divider } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-import { useThemePreset } from '@/components/ThemeRegistry'
-import { School, Sports, Nature, DirectionsBus } from '@mui/icons-material'
-import { applyCzechTypography } from '@/lib/czechTypography'
+export const metadata: Metadata = {
+  title: "O nás",
+  description: "Mateřská škola Jiřetín pod Jedlovou - SMÍŠEK. Poznejte naši školu, její historii, poslání a tým pedagogů, kteří se starají o vaše děti.",
+  keywords: ["o nás", "mateřská škola", "Jiřetín pod Jedlovou", "SMÍŠEK", "historie", "tým", "pedagogové"],
+  openGraph: {
+    title: "O nás | MŠ Jiřetín pod Jedlovou - SMÍŠEK",
+    description: "Poznejte naši mateřskou školu, její historii, poslání a tým pedagogů, kteří se starají o vaše děti.",
+  },
+};
 
 export default function AboutPage() {
-  const theme = useTheme()
-  const { currentPreset } = useThemePreset()
-
   return (
-    <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
-      <Typography 
-        variant="h2" 
-        component="h1" 
-        gutterBottom 
-        sx={{ 
-          mb: 6,
-          fontFamily: currentPreset.typography.headingFontFamily,
+    <Container maxWidth="lg" sx={{ py: { xs: 4, md: 8 } }}>
+      <Box sx={{ mb: 6 }}>
+        <Typography variant="h2" component="h1" gutterBottom>
+          O naší mateřské škole
+        </Typography>
+        <Typography variant="h5" color="text.secondary" sx={{ mb: 4 }}>
+          MŠ Jiřetín pod Jedlovou - SMÍŠEK
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: '2fr 1fr' },
+          gap: 4,
         }}
       >
-        O nás
-      </Typography>
-      
-      {/* MŠ Jiřetín pod Jedlovou - SMÍŠEK */}
-      <Paper 
-        sx={{ 
-          p: { xs: 3, md: 5 }, 
-          mb: 6,
-          background: currentPreset.custom.heroGradient || theme.palette.background.paper,
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-          <Box
-            sx={{
-              width: 56,
-              height: 56,
-              borderRadius: currentPreset.components.button.borderRadius,
-              background: currentPreset.custom.accentGradient || `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-            }}
-          >
-            <School sx={{ fontSize: 28 }} />
-          </Box>
-          <Typography 
-            variant="h4" 
-            component="h2"
-            sx={{
-              fontFamily: currentPreset.typography.headingFontFamily,
-              fontWeight: 700,
-            }}
-          >
-            MŠ Jiřetín pod Jedlovou - SMÍŠEK
-          </Typography>
+        <Box>
+          <Card sx={{ mb: 4 }}>
+            <CardContent sx={{ p: 4 }}>
+              <Typography variant="h4" gutterBottom>
+                Naše poslání
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7 }}>
+                Mateřská škola Jiřetín pod Jedlovou - SMÍŠEK poskytuje předškolní vzdělávání 
+                dětem ve věku od 3 do 6 let v krásném prostředí Lužických hor. Naším cílem 
+                je vytvořit bezpečné, podnětné a láskyplné prostředí, kde se každé dítě může 
+                rozvíjet podle svých individuálních potřeb a schopností.
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7 }}>
+                Naše škola se nachází v areálu obce Jiřetín pod Jedlovou, což nám umožňuje 
+                využívat sportovní zázemí a přírodní prostředí pro různorodé aktivity. 
+                Věříme v propojení vzdělávání s pohybem a pobytem v přírodě.
+              </Typography>
+            </CardContent>
+          </Card>
+
+          <Card sx={{ mb: 4 }}>
+            <CardContent sx={{ p: 4 }}>
+              <Typography variant="h4" gutterBottom>
+                Naše hodnoty
+              </Typography>
+              <Box component="ul" sx={{ pl: 2 }}>
+                <Typography component="li" variant="body1" sx={{ mb: 2, lineHeight: 1.7 }}>
+                  <strong>Individuální přístup</strong> - každé dítě je jedinečné a má své specifické potřeby
+                </Typography>
+                <Typography component="li" variant="body1" sx={{ mb: 2, lineHeight: 1.7 }}>
+                  <strong>Bezpečnost a pohoda</strong> - vytváříme prostředí, kde se děti cítí jistě a spokojeně
+                </Typography>
+                <Typography component="li" variant="body1" sx={{ mb: 2, lineHeight: 1.7 }}>
+                  <strong>Propojení s přírodou</strong> - využíváme krásné prostředí Lužických hor pro vzdělávání
+                </Typography>
+                <Typography component="li" variant="body1" sx={{ mb: 2, lineHeight: 1.7 }}>
+                  <strong>Spolupráce s rodiči</strong> - rodiče jsou našimi partnery ve vzdělávání dětí
+                </Typography>
+                <Typography component="li" variant="body1" sx={{ lineHeight: 1.7 }}>
+                  <strong>Radost z učení</strong> - podporujeme přirozenou zvědavost a chuť dětí poznávat svět
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
         </Box>
 
-        <Box sx={{ pl: { xs: 2, sm: 4, md: 9 } }}>
-          <Typography variant="body1" paragraph sx={{ lineHeight: 1.8, mb: 2 }}>
-            {applyCzechTypography(
-              'Naše mateřská škola se nachází ve sportovním areálu obce Jiřetín pod Jedlovou, což nám dává jedinečnou možnost trávit s dětmi většinu dne venku. K dispozici máme vlastní uzamčenou zahradu s pískovištěm a dřevěnými herními prvky a zároveň využíváme celý sportovní areál včetně hřišť. Díky tomu si děti každý den užívají pestré pohybové aktivity v průběhu všech ročních období.',
-            )}
-          </Typography>
-          
-          <Typography variant="body1" paragraph sx={{ lineHeight: 1.8, mb: 2 }}>
-            Rádi vyrážíme i mimo areál – v okolí školky máme „naše" lesíky, kde si děti hrají, objevují přírodu a učí se venku. Rádi zavítáme i do rekreačního střediska Netopýr – děti se tam setkávají se zvířaty, hrají si u potoka a vydávají se na malé dobrodružné výpravy.
-          </Typography>
-
-          <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-            Školka má jednu heterogenní třídu pro děti ve věku 3–7 let s maximálním počtem 25 dětí. Součástí budovy je také tělocvična, kterou můžeme využívat. Dostupnost je snadná – autem (velké parkoviště) i autobusem, zastávka je přibližně 7 minut chůze.
-          </Typography>
+        <Box>
+          <Card>
+            <CardContent sx={{ p: 4 }}>
+              <Typography variant="h5" gutterBottom>
+                Základní informace
+              </Typography>
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="subtitle2" color="primary" gutterBottom>
+                  Název školy
+                </Typography>
+                <Typography variant="body2">
+                  MŠ Jiřetín pod Jedlovou, okres Děčín, příspěvková organizace
+                </Typography>
+              </Box>
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="subtitle2" color="primary" gutterBottom>
+                  Adresa
+                </Typography>
+                <Typography variant="body2">
+                  Školní 273<br />
+                  407 56 Jiřetín pod Jedlovou
+                </Typography>
+              </Box>
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="subtitle2" color="primary" gutterBottom>
+                  Kontakt
+                </Typography>
+                <Typography variant="body2">
+                  Tel: +420 702 152 232<br />
+                  Email: skolka@jiretin.cz
+                </Typography>
+              </Box>
+              <Box>
+                <Typography variant="subtitle2" color="primary" gutterBottom>
+                  Kapacita
+                </Typography>
+                <Typography variant="body2">
+                  Maximálně 25 dětí ve věku 3-6 let
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
         </Box>
-      </Paper>
-
-      {/* Naše hodnoty */}
-      <Paper sx={{ p: { xs: 3, md: 5 }, mb: 6 }}>
-        <Typography 
-          variant="h4" 
-          gutterBottom 
-          sx={{
-            mb: 3,
-            fontFamily: currentPreset.typography.headingFontFamily,
-            fontWeight: 700,
-            color: 'primary.main',
-          }}
-        >
-          Naše hodnoty
-        </Typography>
-        <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-          <strong>Bezpečnost a péče:</strong> Vytváříme prostředí, kde se děti cítí bezpečně a jsou 
-          pod odborným dohledem kvalifikovaných pedagogů.
-        </Typography>
-        <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-          <strong>Individuální přístup:</strong> Respektujeme jedinečnost každého dítěte a podporujeme 
-          jeho individuální rozvoj.
-        </Typography>
-        <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-          <strong>Spolupráce s rodinami:</strong> Jsme partnerem rodičů při výchově dětí, ne jejich náhradou.
-        </Typography>
-        <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-          <strong>Radost z učení:</strong> Podporujeme přirozenou zvídavost dětí a radost z objevování světa.
-        </Typography>
-      </Paper>
-
-      {/* Doplňkové činnosti */}
-      <Paper sx={{ p: { xs: 3, md: 4 }, mb: 4 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <Box
-            sx={{
-              width: 48,
-              height: 48,
-              borderRadius: currentPreset.components.button.borderRadius,
-              background: currentPreset.custom.accentGradient || `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-            }}
-          >
-            <Sports sx={{ fontSize: 24 }} />
-          </Box>
-          <Typography 
-            variant="h5" 
-            component="h2"
-            sx={{
-              fontFamily: currentPreset.typography.headingFontFamily,
-              fontWeight: 700,
-            }}
-          >
-            Doplňkové činnosti
-          </Typography>
-        </Box>
-
-        <Box sx={{ pl: { xs: 0, md: 8 } }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5, color: 'primary.main' }}>
-                Společné akce pro děti a rodiče
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, fontSize: '0.875rem' }}>
-                Podzimní setkání, vánoční posezení, karneval, hry v přírodě
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: 'primary.main' }}>
-                Narozeninové oslavy dětí
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5, color: 'primary.main' }}>
-                Dodržování lidových tradic
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, fontSize: '0.875rem' }}>
-                Vánoce, Velikonoce, vynášení zimy, čarodějnice...
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: 'primary.main' }}>
-                Pasování školáků
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: 'primary.main' }}>
-                Poznávací výlety
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: 'primary.main' }}>
-                Plavecký výcvik
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5, color: 'primary.main' }}>
-                Projektové dny
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, fontSize: '0.875rem' }}>
-                Sportovní olympiáda, den s hasiči
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5, color: 'primary.main' }}>
-                Spolupráce s ZŠ Dolní Podluží
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, fontSize: '0.875rem' }}>
-                Účast předškoláků v dopoledním vyučování 1. třídy, schůzka pro rodiče
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-      </Paper>
-
-      {/* Kontaktní údaje */}
-      <Paper sx={{ p: { xs: 3, md: 4 } }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <Box
-            sx={{
-              width: 48,
-              height: 48,
-              borderRadius: currentPreset.components.button.borderRadius,
-              background: currentPreset.custom.accentGradient || `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-            }}
-          >
-            <DirectionsBus sx={{ fontSize: 24 }} />
-          </Box>
-          <Typography 
-            variant="h5" 
-            component="h2"
-            sx={{
-              fontFamily: currentPreset.typography.headingFontFamily,
-              fontWeight: 700,
-            }}
-          >
-            Kontaktní údaje
-          </Typography>
-        </Box>
-
-        <Box sx={{ pl: { xs: 0, md: 8 } }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>
-                Adresa
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.875rem' }}>
-                Školní 273, Jiřetín pod Jedlovou, 407 56
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>
-                Telefon
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.875rem' }}>
-                702 152 232
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>
-                Email
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.875rem' }}>
-                skolka@jiretin.cz
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>
-                IČO
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.875rem' }}>
-                727 43 093
-              </Typography>
-            </Box>
-
-            <Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>
-                Zřizovatel
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.875rem' }}>
-                Obec Jiřetín pod Jedlovou, Vinařská 32, 407 56
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-      </Paper>
+      </Box>
     </Container>
-  )
+  );
 }
